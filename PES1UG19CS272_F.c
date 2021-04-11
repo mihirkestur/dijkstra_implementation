@@ -2,17 +2,19 @@
 #include<stdlib.h>
 #include "PES1UG19CS272_H.h"
 
-//initialise the graph structure
-graph *initialise_graph(int num_vertices){
+//allocates memory for a graph structure 
+graph *create_graph(){
     graph *new_graph = (graph *)malloc(sizeof(graph));
-    new_graph->array_list = (adjacency_list *)malloc(num_vertices * sizeof(adjacency_list));
-    new_graph->num_vertices = num_vertices;
-    for (int i = 1; i <= num_vertices; i++){
+    return new_graph;
+}
+//initialise the graph structure
+graph *initialise_graph(graph *new_graph){
+    new_graph->array_list = (adjacency_list *)malloc(new_graph->num_vertices * sizeof(adjacency_list));
+    for (int i = 1; i <= new_graph->num_vertices; i++){
         new_graph->array_list[i].head_vertex = NULL;  
     }
     return new_graph;
 }
-
 //gets a new vertex given values
 vertex *get_vertex(int destination_vertex, int weight){
     vertex *new_vertex = (vertex *)malloc(sizeof(vertex));
@@ -21,33 +23,33 @@ vertex *get_vertex(int destination_vertex, int weight){
     new_vertex->next_vertex = NULL;
     return new_vertex;
 }
-
-void insert_vertex(adjacency_list *list, int destination, int weight){
-    vertex *new_vertex = get_vertex(destination,weight);
+//insert the vertex into the list
+void insert_vertex(adjacency_list *list, vertex *new_vertex){
     if(list->head_vertex == NULL){
         list->head_vertex = new_vertex;
         return;
     }
     else{        
-        while(list->head_vertex->next_vertex){
-            list->head_vertex = list->head_vertex->next_vertex;
+        vertex *traverse = list->head_vertex;
+        while(traverse->next_vertex){
+            traverse = traverse->next_vertex;
         }
-        list->head_vertex->next_vertex = new_vertex;
+        traverse->next_vertex = new_vertex;
     }
 }
-
+//display the graph
 void display_graph(graph *input_graph){
     for(int i = 1; i <= input_graph->num_vertices; i++){
         vertex *temp = input_graph->array_list[i].head_vertex;
         while(temp){
-            printf("dst %d  wt %d ",temp->destination_vertex,temp->weight);
+            printf("%d %d ",temp->destination_vertex,temp->weight);
             temp = temp->next_vertex;
         }
         printf("\n");
     }
     
 }
-
+//read from input file and store it in the graph
 void read_and_store(graph *input_graph){
     int flag = 1;
     FILE *file_ptr = fopen("adjacencylist.txt","r");
@@ -62,6 +64,7 @@ void read_and_store(graph *input_graph){
         if(flag){
             flag = 0;
             input_graph->num_vertices = atoi(line);
+            initialise_graph(input_graph);
         }
         else{
             while(sscanf(start, "%d%n", &number, &n) == 1){
@@ -70,8 +73,7 @@ void read_and_store(graph *input_graph){
                 ++size;
             }
             for(int i=1;i<size;i=i+2){
-                printf("%d  %d  %d\n",temp[0], temp[i], temp[i+1]);
-                insert_vertex(&input_graph->array_list[temp[0]], temp[i], temp[i+1]);
+                insert_vertex(&input_graph->array_list[temp[0]], get_vertex(temp[i], temp[i+1]));
             }
         }
     }

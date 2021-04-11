@@ -16,12 +16,14 @@ typedef struct graph_structure{
     int num_vertices;
 }graph;
 
+//allocates memory for a graph structure 
+graph *create_graph();
 //initialise the graph structure
-graph *initialise_graph(int);
+graph *initialise_graph(graph *);
 //gets new vertex node
 vertex *get_vertex(int, int);
 //insert the vertex
-void insert_vertex(adjacency_list *, int, int);
+void insert_vertex(adjacency_list *, vertex *);
 
 //read the inputs in the file and store the content in the adjacency list
 void read_and_store(graph *);
