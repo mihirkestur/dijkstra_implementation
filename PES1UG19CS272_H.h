@@ -1,22 +1,30 @@
-extern int DEBUG;
-extern int num_vertices;
-
 //vertex structure
 typedef struct vertex_structure{
     int weight;
-    struct vertex_structure *next_vertex_node;
+    int destination_vertex;
+    struct vertex_structure *next_vertex;
 }vertex;
 
-//adjacency list containing all vertices
+//adjacency list 
 typedef struct adjacency_list_structure{
-    int vertex_number;
     vertex *head_vertex;
-    struct adjaceny_list_structure *next_list_node;
-}list;
+}adjacency_list;
+
+//graph structure
+typedef struct graph_structure{
+    adjacency_list *array_list;
+    int num_vertices;
+}graph;
+
+//initialise the graph structure
+graph *initialise_graph(int);
+//gets new vertex node
+vertex *get_vertex(int, int);
+//insert the vertex
+void insert_vertex(adjacency_list *, int, int);
 
 //read the inputs in the file and store the content in the adjacency list
-void read_and_store();
-//gets new vertex node
-vertex *get_vertex_node(int, vertex *);
-//gets adjacency list node
-list *get_list_node(int, vertex *, list *);
+void read_and_store(graph *);
+//display graph
+void display_graph(graph *);
+void dijkstra();
