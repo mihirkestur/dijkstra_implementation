@@ -2,14 +2,14 @@
 #include<stdlib.h>
 #include "PES1UG19CS272_H.h"
 
-void main(){
+int main(){
 
     FILE *fptr;
     fptr = fopen("adjacencylist.txt", "r");
     int ch;
     if(fptr == NULL) {
         printf("NULL\n");
-        return;
+        return 0;
     }
     int V;
     fscanf(fptr,"%d",&V);
@@ -38,9 +38,7 @@ void main(){
                 insert_vertex(input_graph,dest,src,weight);
             }
     }
-
-
-
- // printGraph(graph);
-  dijkstra(input_graph, V);
+    // printGraph(graph);
+    dijkstra(input_graph, 20);
+  return 0;
 }
