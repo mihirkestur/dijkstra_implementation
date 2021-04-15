@@ -15,12 +15,12 @@ int main(){
     //create the graph structure
     graph *input_graph = get_new_graph(num_vertices);
     //put all vertices/connections in the graph
-    char line[1000];
+    char line[100000];
     fgets(line, sizeof(line), file_pointer);
     //until EOF run loop
     while(fgets(line,sizeof(line),file_pointer)){
         char *start = line;
-        int number, offset, size = 0, num_array[1000];
+        int number, offset, size = 0, num_array[100000];
         while(sscanf(start, "%d%n", &number, &offset)){
             start = start + offset;
             num_array[size] = number;
