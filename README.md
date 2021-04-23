@@ -3,7 +3,7 @@ This is an implementation of single destination shortest path problem using the 
 dijkstra algorithm.
 <br><br>
 Here is the output for the test case in the adjacencylist.txt<br>
-<img src="test_ouptut.png"/>
+<img src="https://github.com/mihirkestur/dijkstra_implementation/blob/main/test_output.png"/>
 <br>
 Compilation<br>
 ```bash
