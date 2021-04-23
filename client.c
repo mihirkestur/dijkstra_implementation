@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include "PES1UG19CS272_H.h"
+#include "header.h"
 
 int main(){
     //read the input file

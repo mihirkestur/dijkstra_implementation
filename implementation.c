@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<limits.h>
-#include "PES1UG19CS272_H.h"
+#include "header.h"
 
 //function to get new vertex
 vertex *get_new_vertex(int destination, int weight){
